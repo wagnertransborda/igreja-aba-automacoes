@@ -1,0 +1,13 @@
+{
+  "name": "igreja-aba-automacoes",
+  "private": true,
+  "description": "Igreja ABA Curitiba: Forms -> n8n -> BotConversa (visitantes e novo convertido) + artes",
+  "scripts": {
+    "workflow": "node n8n/gerar-workflow.js",
+    "artes": "node artes/render.js"
+  },
+  "dependencies": {
+    "puppeteer-core": "*",
+    "qrcode": "*"
+  }
+}

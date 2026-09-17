@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Carta Novo Convertido ABA</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@1,600;1,700&display=swap" rel="stylesheet">
+<style>
+  @page { size: A4; margin: 0 }
+  :root { --petroleo: #0c3533; --petroleo-2: #134a46; --salvia: #a9c9bd; --salvia-clara: #e6f0ec; --texto: #1d2a29; --cinza: #51605e }
+  * { box-sizing: border-box; margin: 0; padding: 0 }
+  html, body { background: #fff }
+  body { font-family: 'Montserrat', Arial, sans-serif; color: var(--texto); -webkit-print-color-adjust: exact; print-color-adjust: exact }
+  .folha { width: 210mm; height: 297mm; position: relative; overflow: hidden; display: flex; flex-direction: column }
+  .topo { background: radial-gradient(120% 140% at 0% 0%, var(--petroleo-2) 0%, var(--petroleo) 55%, #081f1e 100%); color: #fff; padding: 13mm 18mm 11mm; position: relative; overflow: hidden; flex: none }
+  .topo .espiral { position: absolute; width: 70mm; right: -8mm; top: -12mm; opacity: .12 }
+  .topo .logo { width: 40mm; position: relative; display: block }
+  .topo h1 { position: relative; margin-top: 8mm; font-size: 25pt; font-weight: 800; line-height: 1.1 }
+  .topo h1 .serif { font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-weight: 700; color: var(--salvia); font-size: 31pt }
+  .topo p { position: relative; margin-top: 2.5mm; font-size: 10pt; font-weight: 600; letter-spacing: .4pt; color: var(--salvia) }
+  .corpo { padding: 9mm 18mm 0; flex: 1; display: flex; flex-direction: column }
+  .abertura { font-size: 11pt; line-height: 1.6 }
+  .abertura b, .corpo li b, .final b { color: var(--petroleo); font-weight: 700 }
+  h2 { margin-top: 7mm; font-size: 12pt; font-weight: 800; color: var(--petroleo); display: flex; align-items: center; gap: 2.5mm }
+  h2 .ico { width: 7.5mm; height: 7.5mm; border-radius: 50%; background: var(--salvia-clara); display: grid; place-items: center; font-size: 10.5pt }
+  .corpo > p.txt { margin-top: 2.5mm; font-size: 10.5pt; line-height: 1.6 }
+  ul { list-style: none; margin-top: 3mm; display: grid; gap: 2.4mm }
+  li { font-size: 10.3pt; line-height: 1.55; padding: 2.6mm 4mm 2.6mm 5.5mm; background: var(--salvia-clara); border-radius: 2.5mm; border-left: 1.2mm solid var(--petroleo-2) }
+  .final { margin-top: 7mm; font-size: 11pt; line-height: 1.6; text-align: center; padding: 4mm; border-top: .3mm solid #d5e3dd; border-bottom: .3mm solid #d5e3dd }
+  .assinatura { margin-top: 6mm; font-size: 10.5pt; line-height: 1.5 }
+  .assinatura .serif { font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-weight: 700; font-size: 17pt; color: var(--petroleo) }
+  .assinatura b { display: block; margin-top: 1mm; color: var(--petroleo) }
+  .rodape { flex: none; margin-top: auto; background: var(--petroleo); color: #fff; padding: 4.5mm 18mm; display: flex; justify-content: space-between; align-items: center; font-size: 8.5pt }
+  .rodape b { font-weight: 700 }
+  .rodape span { color: var(--salvia) }
+</style>
+</head>
+<body>
+<div class="folha">
+  <header class="topo">
+    <img class="espiral" src="../assets/espiral.png" alt="">
+    <img class="logo" src="../assets/logo-aba-recortado.png" alt="Igreja ABA">
+    <h1>Bem-vindo à <span class="serif">Família ABA!</span></h1>
+    <p>Aliança Bíblica de Avivamento – Um Lar para Pertencer</p>
+  </header>
+
+  <main class="corpo">
+    <p class="abertura">Celebramos a sua decisão de caminhar com Cristo! Você não entrou para uma religião, mas iniciou um <b>relacionamento pessoal com Jesus</b>.</p>
+
+    <h2><span class="ico">🌟</span>O que mudou?</h2>
+    <p class="txt">Você agora é uma <b>nova criatura</b> e filho(a) amado(a) de Deus. O Espírito Santo habita em você, trazendo paz, consolo e direção.</p>
+
+    <h2><span class="ico">🧭</span>Os 3 Pilares da Caminhada</h2>
+    <ul>
+      <li><b>Oração:</b> Converse com Deus como com um melhor amigo — de forma simples e sincera.</li>
+      <li><b>Palavra:</b> Alimente-se da Bíblia. Comece pelo <b>Evangelho de João</b> para conhecer o amor de Jesus.</li>
+      <li><b>Comunhão:</b> Não caminhe sozinho. Participe dos cultos e fortaleça sua fé em comunidade.</li>
+    </ul>
+
+    <h2><span class="ico">👣</span>Próximos Passos</h2>
+    <ul>
+      <li><b>GC’s - Grupos de Crescimento:</b> Espaços seguros para criar amizades e tirar dúvidas.</li>
+      <li><b>Discipulado Pessoal:</b> Um acompanhamento individual para o seu crescimento espiritual.</li>
+      <li><b>Batismo nas Águas:</b> A declaração pública da sua nova vida com Cristo (no seu tempo).</li>
+    </ul>
+
+    <p class="final"><b>Você não está sozinho.</b> Estamos aqui para caminhar ao seu lado!</p>
+
+    <div class="assinatura">
+      <span class="serif">Com amor,</span>
+      <b>Família ABA - Aliança Bíblica de Avivamento</b>
+      Um Lar para Pertencer.
+    </div>
+  </main>
+
+  <footer class="rodape">
+    <div><b>Igreja ABA</b> <span>· Curitiba</span></div>
+    <div>@igrejaabacuritiba <span>·</span> (41) 9 9512-6655</div>
+  </footer>
+</div>
+</body>
+</html>

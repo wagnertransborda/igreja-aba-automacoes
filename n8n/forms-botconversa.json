@@ -1,0 +1,305 @@
+{
+  "name": "Forms -> BotConversa",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/1RbgcZyB-w60Ozhc0QKawFozTK9989Kdo0XQCq4qea7A/edit#gid=1776806115",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1776806115,
+          "mode": "list",
+          "cachedResultName": "Respostas ao formulário 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1RbgcZyB-w60Ozhc0QKawFozTK9989Kdo0XQCq4qea7A/edit#gid=1776806115"
+        },
+        "event": "rowAdded",
+        "options": {}
+      },
+      "id": "a1b2c3d4-0001-4000-8000-000000000001",
+      "name": "Forms - Nova resposta",
+      "type": "n8n-nodes-base.googleSheetsTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a1b2c3d4-1001-4000-8000-000000000001",
+              "name": "api_key",
+              "value": "COLE_AQUI_A_CHAVE_DA_API_DO_BOTCONVERSA",
+              "type": "string"
+            },
+            {
+              "id": "a1b2c3d4-1001-4000-8000-000000000002",
+              "name": "flow_id",
+              "value": 9004500,
+              "type": "number"
+            },
+            {
+              "id": "a1b2c3d4-1001-4000-8000-000000000003",
+              "name": "aviso_telefone",
+              "value": "5541995126655",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "id": "a1b2c3d4-0002-4000-8000-000000000002",
+      "name": "CONFIGURAR AQUI (chave e fluxo)",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        240,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Recebe a linha nova do Forms + as configurações do bloco anterior\n// e devolve telefone limpo, nome separado, chave e fluxo.\n// Acha as colunas pelo começo do texto da pergunta, então tanto faz\n// \"Nome Completo?\" ou \"Digite o telefone com DDD...\".\nreturn $input.all().map((item, i) => {\n  const row = item.json;\n  // \"Como conheceu a Igreja?\" também fala em \"nome\", por isso o nome é pelo começo\n  const coluna = (acha) => {\n    const chave = Object.keys(row).find(k => acha(k.trim().toLowerCase()));\n    return chave ? row[chave] : '';\n  };\n\n  // Telefone -> só números, sem zero na frente, com DDI 55\n  let phone = String(coluna(k => k.includes('telefone')) ?? '').replace(/[^0-9]/g, '');\n  phone = phone.replace(/^0+/, '');\n  if (phone.length === 10 || phone.length === 11) phone = '55' + phone;\n\n  // Nome -> primeiro nome + sobrenome\n  const nomeCompleto = String(coluna(k => k.startsWith('nome')) || 'Lead').trim().replace(/ +/g, ' ');\n  const partes = nomeCompleto.split(' ');\n  const first_name = partes.shift() || 'Lead';\n  const last_name = partes.join(' ');\n\n  return {\n    json: {\n      phone, first_name, last_name,\n      api_key: String(row.api_key ?? '').trim(),\n      flow_id: Number(row.flow_id),\n    },\n    pairedItem: { item: i },\n  };\n});"
+      },
+      "id": "a1b2c3d4-0003-4000-8000-000000000003",
+      "name": "Normaliza telefone/nome",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        480,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://backend.botconversa.com.br/api/v1/webhook/subscriber/",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "API-KEY",
+              "value": "={{ $json.api_key }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ phone: $json.phone, first_name: $json.first_name, last_name: $json.last_name || \"-\" }) }}",
+        "options": {}
+      },
+      "id": "a1b2c3d4-0004-4000-8000-000000000004",
+      "name": "BotConversa - Cria assinante",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        720,
+        0
+      ],
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://backend.botconversa.com.br/api/v1/webhook/subscriber/{{ $json.id }}/send_flow/",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "API-KEY",
+              "value": "={{ $('Normaliza telefone/nome').item.json.api_key }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"flow\": {{ $('Normaliza telefone/nome').item.json.flow_id }}\n}",
+        "options": {}
+      },
+      "id": "a1b2c3d4-0005-4000-8000-000000000005",
+      "name": "BotConversa - Dispara fluxo",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        960,
+        0
+      ],
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Monta a mensagem de aviso com tudo o que a pessoa respondeu no Forms.\n// Rótulos curtos para as perguntas conhecidas; pergunta nova entra com o texto dela.\nconst ROTULOS = [\n  ['carimbo', '📅 *Data/hora:*'],\n  ['nome', '👤 *Nome:*'],\n  ['telefone', '📱 *Telefone:*'],\n  ['idade', '🎂 *Idade:*'],\n  ['oração', '🙏 *Pedido de oração:*'],\n  ['conheceu', '⛪ *Como conheceu:*'],\n];\nconst IGNORAR = ['api_key', 'flow_id', 'aviso_telefone', 'row_number'];\n\nreturn $input.all().map((item, i) => {\n  const row = item.json;\n  const linhas = [];\n  let whats = '';\n  for (const k of Object.keys(row)) {\n    if (IGNORAR.includes(k)) continue;\n    const valor = String(row[k] ?? '').trim();\n    if (!valor) continue;\n    const chave = k.toLowerCase();\n    const rotulo = (ROTULOS.find(([p]) => p === 'nome' ? chave.startsWith(p) : chave.includes(p)) || [])[1] || ('▫️ *' + k.replace(/\\?$/, '') + ':*');\n    linhas.push(rotulo + ' ' + valor);\n    if (chave.includes('telefone')) {\n      let n = valor.replace(/[^0-9]/g, '').replace(/^0+/, '');\n      if (n.length === 10 || n.length === 11) n = '55' + n;\n      whats = 'https://wa.me/' + n;\n    }\n  }\n  const texto = ['🔔 *Novo cadastro de visitante*', '', ...linhas]\n    .concat(whats ? ['', '💬 Falar com a pessoa: ' + whats] : [])\n    .join('\\n');\n  return {\n    json: { texto, aviso_telefone: String(row.aviso_telefone ?? '').replace(/[^0-9]/g, ''), api_key: String(row.api_key ?? '').trim() },\n    pairedItem: { item: i },\n  };\n});"
+      },
+      "id": "a1b2c3d4-0006-4000-8000-000000000006",
+      "name": "Monta aviso",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        480,
+        240
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://backend.botconversa.com.br/api/v1/webhook/subscriber/",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "API-KEY",
+              "value": "={{ $json.api_key }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"phone\": {{ JSON.stringify($json.aviso_telefone) }},\n  \"first_name\": \"Avisos\",\n  \"last_name\": \"Cadastro Visitantes\"\n}",
+        "options": {}
+      },
+      "id": "a1b2c3d4-0007-4000-8000-000000000007",
+      "name": "BotConversa - Contato do aviso",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        720,
+        240
+      ],
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://backend.botconversa.com.br/api/v1/webhook/subscriber/{{ $json.id }}/send_message/",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "API-KEY",
+              "value": "={{ $('Monta aviso').item.json.api_key }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"type\": \"text\",\n  \"value\": {{ JSON.stringify($('Monta aviso').item.json.texto) }}\n}",
+        "options": {}
+      },
+      "id": "a1b2c3d4-0008-4000-8000-000000000008",
+      "name": "BotConversa - Envia aviso",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        960,
+        240
+      ],
+      "onError": "continueRegularOutput"
+    }
+  ],
+  "connections": {
+    "Forms - Nova resposta": {
+      "main": [
+        [
+          {
+            "node": "CONFIGURAR AQUI (chave e fluxo)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "CONFIGURAR AQUI (chave e fluxo)": {
+      "main": [
+        [
+          {
+            "node": "Normaliza telefone/nome",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Monta aviso",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normaliza telefone/nome": {
+      "main": [
+        [
+          {
+            "node": "BotConversa - Cria assinante",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "BotConversa - Cria assinante": {
+      "main": [
+        [
+          {
+            "node": "BotConversa - Dispara fluxo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Monta aviso": {
+      "main": [
+        [
+          {
+            "node": "BotConversa - Contato do aviso",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "BotConversa - Contato do aviso": {
+      "main": [
+        [
+          {
+            "node": "BotConversa - Envia aviso",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  }
+}

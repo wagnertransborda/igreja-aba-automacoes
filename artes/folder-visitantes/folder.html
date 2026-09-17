@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Folder Visitantes ABA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Cormorant+Garamond:ital,wght@1,500;1,600;1,700&display=swap" rel="stylesheet">
+<style>
+  @page { size: 210mm 150mm; margin: 0 }
+  :root {
+    --preto: #070b0b;
+    --petroleo: #0c3533;
+    --petroleo-2: #134a46;
+    --salvia: #a9c9bd;
+    --salvia-clara: #d3e6de;
+    --branco: #ffffff;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0 }
+  html, body { background: #fff }
+  body { font-family: 'Montserrat', Arial, sans-serif; color: var(--branco); -webkit-print-color-adjust: exact; print-color-adjust: exact }
+  .pagina { width: 210mm; height: 150mm; position: relative; overflow: hidden; display: flex; page-break-after: always; background: var(--preto) }
+  .pagina:last-child { page-break-after: auto }
+  .painel { width: 105mm; height: 150mm; position: relative; overflow: hidden }
+  .foto { position: absolute; inset: 0; background: url(../assets/foto-culto.jpg) center 30% / cover no-repeat }
+  .serif { font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-weight: 600 }
+
+  /* ===== PÁGINA 1 — lado de fora ===== */
+  .p1 .foto { filter: grayscale(35%) }
+  .p1 .veu { position: absolute; inset: 0;
+    background:
+      linear-gradient(90deg, rgba(7,11,11,.96) 0%, rgba(7,11,11,.9) 46%, rgba(12,53,51,.55) 62%, rgba(12,53,51,.35) 100%),
+      linear-gradient(0deg, rgba(7,11,11,.95) 0%, rgba(7,11,11,0) 45%) }
+
+  /* verso: agenda */
+  .agenda { padding: 10mm 9mm 8mm 10mm; display: flex; flex-direction: column; z-index: 1 }
+  .titulo-agenda { display: flex; align-items: baseline; gap: 2.2mm; margin-bottom: 1.5mm }
+  .titulo-agenda .serif { font-size: 21pt; color: var(--salvia) }
+  .titulo-agenda b { font-size: 16pt; font-weight: 800; letter-spacing: .5pt; text-transform: uppercase }
+  .linha-titulo { width: 14mm; height: .6mm; background: var(--salvia); border-radius: 1mm; margin-bottom: 6mm }
+  .dia { display: grid; grid-template-columns: 21mm 1fr; column-gap: 3mm; padding: 3.1mm 0; border-top: .25mm solid rgba(169,201,189,.22) }
+  
+  .dia-nome { font-size: 7.4pt; font-weight: 700; text-transform: uppercase; letter-spacing: .6pt; color: var(--salvia); padding-top: .9mm; line-height: 1.25 }
+  .evento + .evento { margin-top: 1.6mm }
+  .evento-topo { display: flex; align-items: baseline; gap: 2mm }
+  .hora { font-size: 10.5pt; font-weight: 800; white-space: nowrap }
+  .nome { font-size: 8.2pt; font-weight: 600; line-height: 1.2 }
+  .obs { font-size: 6.6pt; font-weight: 400; color: rgba(255,255,255,.72); margin-top: .5mm; line-height: 1.3 }
+  .destaque-gc { color: var(--salvia-clara) }
+  .rodape-agenda { margin-top: auto; display: flex; align-items: center; gap: 2.5mm; padding-top: 3mm }
+  .icone { width: 7mm; height: 7mm; border-radius: 50%; background: var(--salvia); display: grid; place-items: center; flex: none }
+  .icone svg { width: 4.2mm; height: 4.2mm }
+  .rodape-agenda small { display: block; font-size: 6.6pt; color: rgba(255,255,255,.72) }
+  .rodape-agenda strong { font-size: 10pt; font-weight: 800; letter-spacing: .2pt }
+
+  /* capa */
+  .capa { z-index: 1; display: flex; flex-direction: column; padding: 10mm 10mm 9mm 12mm }
+  .capa .logo-aba { width: 34mm }
+  .capa-texto { margin-top: auto; margin-bottom: auto; padding-top: 6mm }
+  .capa-texto .serif { font-size: 36pt; line-height: .8; color: var(--salvia-clara); display: block }
+  .capa-texto h1 { font-size: 27pt; font-weight: 900; line-height: .98; letter-spacing: -.3pt; text-transform: uppercase; margin-top: 1mm }
+  .capa-texto p { margin-top: 4mm; font-size: 8.5pt; font-weight: 500; letter-spacing: 2.2pt; text-transform: uppercase; color: var(--salvia) }
+  .capa .frutificar { width: 36mm; align-self: flex-end; opacity: .95 }
+
+  /* ===== PÁGINA 2 — lado de dentro ===== */
+  .boas-vindas { background: radial-gradient(120% 90% at 0% 0%, var(--petroleo-2) 0%, var(--petroleo) 45%, #081f1e 100%); padding: 13mm 10mm 9mm 11mm; display: flex; flex-direction: column }
+  .espiral { position: absolute; width: 74mm; right: -18mm; bottom: -14mm; opacity: .13 }
+  .boas-vindas h2 { position: relative; font-size: 19pt; font-weight: 800; line-height: 1.12; letter-spacing: -.2pt }
+  .boas-vindas h2 .serif { font-size: 25pt; font-weight: 600; color: var(--salvia-clara); letter-spacing: 0; line-height: 1 }
+  .traco { position: relative; width: 14mm; height: .6mm; background: var(--salvia); border-radius: 1mm; margin-top: 7mm }
+  .boas-vindas .texto { position: relative; margin-top: 5mm; font-size: 10pt !important; font-size: 9pt; line-height: 1.5; color: rgba(255,255,255,.86); max-width: 78mm }
+  .boas-vindas .texto b { color: var(--salvia-clara); font-weight: 700 }
+  .boas-vindas .logo-aba { position: relative; width: 38mm; margin-top: auto }
+
+  .conecte .foto { filter: grayscale(40%) }
+  .conecte .foto { inset: auto 0 0 0; height: 108mm; background-position: 62% 8%; background-size: auto 150%; filter: grayscale(30%) }
+  .conecte .veu { position: absolute; inset: 0; background: linear-gradient(180deg, #070b0b 0%, #070b0b 40%, rgba(7,11,11,.55) 62%, rgba(12,53,51,.3) 85%, rgba(7,11,11,.5) 100%) }
+  .conecte-conteudo { position: relative; z-index: 1; height: 100%; padding: 13mm 10mm 9mm 10mm; display: flex; flex-direction: column }
+  .conecte h2 { font-size: 16pt; font-weight: 800; line-height: 1.14 }
+  .conecte h2 .serif { font-size: 20pt; color: var(--salvia-clara); line-height: 1 }
+  .conecte .sub { margin-top: 3.5mm; font-size: 8.6pt; line-height: 1.45; color: rgba(255,255,255,.82) }
+  .cartao { margin-top: 6mm; border: .3mm solid rgba(169,201,189,.45); background: rgba(12,53,51,.55); border-radius: 4mm; padding: 4.5mm; display: flex; align-items: center; gap: 3.5mm }
+  .ig-logo { width: 13mm; height: 13mm; flex: none; border-radius: 3.6mm; display: grid; place-items: center;
+    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%) }
+  .ig-logo svg { width: 8.2mm; height: 8.2mm }
+  .cartao small { display: block; font-size: 6.8pt; text-transform: uppercase; letter-spacing: 1pt; color: var(--salvia); font-weight: 700 }
+  .cartao strong { display: block; font-size: 11pt; font-weight: 800; margin-top: .6mm }
+  .cartao .url { display: block; font-size: 7.2pt; color: rgba(255,255,255,.75); margin-top: .6mm }
+  .whats { margin-top: 7mm; display: flex; align-items: center; gap: 3mm }
+  .whats .icone { width: 9mm; height: 9mm; background: #25D366 }
+  .whats .icone svg { width: 5.4mm; height: 5.4mm }
+  .whats small { display: block; font-size: 7.6pt; color: rgba(255,255,255,.78) }
+  .whats strong { font-size: 13pt; font-weight: 800 }
+  a { color: inherit; text-decoration: none }
+</style>
+</head>
+<body>
+
+<!-- PÁGINA 1: lado de fora (verso à esquerda, capa à direita) -->
+<section class="pagina p1">
+  <div class="foto"></div>
+  <div class="veu"></div>
+
+  <div class="painel agenda">
+    <div class="titulo-agenda"><span class="serif">Nossa</span><b>agenda</b></div>
+    <div class="linha-titulo"></div>
+
+    <div class="dia">
+      <div class="dia-nome">Quarta-<br>feira</div>
+      <div>
+        <div class="evento">
+          <div class="evento-topo"><span class="hora">20h</span><span class="nome destaque-gc">Reuniões de GC</span></div>
+          <div class="obs">Interessado? Procure o GC mais<br>próximo da sua casa.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dia">
+      <div class="dia-nome">Quinta-<br>feira</div>
+      <div>
+        <div class="evento">
+          <div class="evento-topo"><span class="hora">14h30</span><span class="nome">Academia de Oração de Mulheres</span></div>
+        </div>
+        <div class="evento">
+          <div class="evento-topo"><span class="hora">23h</span><span class="nome">Academia de Oração de Homens</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dia">
+      <div class="dia-nome">Sexta-<br>feira</div>
+      <div class="evento">
+        <div class="evento-topo"><span class="hora">20h</span><span class="nome">Culto Noite de Glória</span></div>
+      </div>
+    </div>
+
+    <div class="dia">
+      <div class="dia-nome">Sábados</div>
+      <div class="evento">
+        <div class="evento-topo"><span class="hora">19h30</span><span class="nome">Culto de Jovens e Adolescentes</span></div>
+        <div class="obs">Quinzenal</div>
+      </div>
+    </div>
+
+    <div class="dia">
+      <div class="dia-nome">Domingo</div>
+      <div class="evento">
+        <div class="evento-topo"><span class="hora">10h e 18h</span><span class="nome">Cultos de Celebração</span></div>
+      </div>
+    </div>
+
+    <a class="rodape-agenda" href="https://wa.me/5541995126655?text=Estou%20vindo%20pelo%20link%20de%20visitante">
+      <div class="icone"><svg viewBox="0 0 24 24" fill="#0c3533"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.3-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.5-.6-2.6-1.1-4.3-3.8-4.4-4-.1-.2-1.1-1.4-1.1-2.7s.7-1.9.9-2.2c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.3 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.2.3.7 1.2 1.5 1.9 1 .9 1.9 1.2 2.1 1.3.3.1.4.1.6-.1l.8-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg></div>
+      <div><small>Em que podemos lhe ajudar?</small><strong>(41) 9 9512-6655</strong></div>
+    </a>
+  </div>
+
+  <div class="painel capa">
+    <img class="logo-aba" src="../assets/logo-aba.png" alt="Igreja ABA">
+    <div class="capa-texto">
+      <span class="serif">Seja</span>
+      <h1>bem-<br>vindo!</h1>
+      <p>Um lar para pertencer</p>
+    </div>
+    <img class="frutificar" src="../assets/frutificar.png" alt="Frutificar 2026">
+  </div>
+</section>
+
+<!-- PÁGINA 2: lado de dentro -->
+<section class="pagina p2">
+  <div class="painel boas-vindas">
+    <img class="espiral" src="../assets/espiral.png" alt="">
+    <h2>Que bom que estamos nos conhecendo! Vai ser um prazer <span class="serif">caminhar com você.</span></h2>
+    <div class="traco"></div><p class="texto">Somos uma <b>família</b>, um lar para pertencer, e queremos estar cada vez mais próximos de você.</p>
+    <img class="logo-aba" src="../assets/logo-aba.png" alt="Igreja ABA">
+  </div>
+
+  <div class="painel conecte">
+    <div class="foto"></div>
+    <div class="veu"></div>
+    <div class="conecte-conteudo">
+      <h2>Fique por dentro de tudo o que acontece <span class="serif">em nossa igreja.</span></h2>
+      <p class="sub">Louvores, palavras, agenda e muito mais. Siga a gente no Instagram:</p>
+
+      <a class="cartao" href="https://www.instagram.com/igrejaabacuritiba/">
+        <div class="ig-logo"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.1"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.1" fill="#fff" stroke="none"/></svg></div>
+        <div>
+          <small>Instagram</small>
+          <strong>@igrejaabacuritiba</strong>
+          <span class="url">instagram.com/igrejaabacuritiba</span>
+        </div>
+      </a>
+
+      <a class="whats" href="https://wa.me/5541995126655?text=Estou%20vindo%20pelo%20link%20de%20visitante">
+        <div class="icone"><svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.3-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.5-.6-2.6-1.1-4.3-3.8-4.4-4-.1-.2-1.100-1.4-1.1-2.7s.7-1.9.9-2.2c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.3 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.2.3.7 1.2 1.5 1.9 1 .9 1.9 1.2 2.1 1.3.3.1.4.1.6-.1l.8-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg></div>
+        <div><small>Em que podemos lhe ajudar?</small><strong>(41) 9 9512-6655</strong></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
