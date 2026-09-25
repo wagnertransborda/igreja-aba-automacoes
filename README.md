@@ -55,8 +55,17 @@ Paleta tirada do Instagram @igrejaabacuritiba: preto `#070b0b`, petróleo `#0c35
 
 ## Pendências (retomar aqui)
 
-1. **Entrada do fluxo NOVO CONVERTIDO** — ainda ninguém entra nele. Definir: QR abre **Forms do convertido** (criar Forms + ramo no n8n com `flow_id` 9260130) **ou** WhatsApp com mensagem pronta (sugestão: "VIM DO LINK DO NOVO CONVERTIDO", diferente da do visitante). Confirmar número (veio 4199512665, falta dígito).
+1. **Entrada do NOVO CONVERTIDO** — ✅ 25/09: Forms "Novo convertido" (`1FAIpQLSf8TSg…`, conta abafinanceiro2023) + QR em `artes/QR NOVO CONVERTIDO.png`. Falta só o 1º teste real pelo QR.
 2. **Ação das 48h** do NOVO CONVERTIDO: escolher o membro em "Atribuir e abrir atendimento" e em "Notificar membro da equipe" e marcar "Notificar por WhatsApp" quando a pessoa se cadastrar no BotConversa.
 3. **Avisar 9 pessoas** a cada visitante: aguardando lista (nome + WhatsApp) e se é aviso para todos ou rodízio.
-4. **n8n em trial** — assinar ou migrar antes de ~30/09.
+4. ✅ **n8n aposentado (25/09)** — os dois Forms agora rodam no **Apps Script** `apps-script/Code.gs` (projeto "Igreja ABA - Forms para BotConversa", conta abafinanceiro2023, chave na propriedade `BOTCONVERSA_API_KEY`, 2 gatilhos "Ao enviar"). Grátis, sem prazo. Workflows do n8n Cloud DESLIGADOS (trial acaba ~30/09). Formulário novo = linha nova em `FORMULARIOS` + rodar `instalar`. ⚠️ Rodar `instalar` numa janela só com a conta abafinanceiro2023 (com várias contas logadas o Executar trava).
 5. Sangria 3 mm no folder se a gráfica pedir.
+
+## Pedido de oração (25/09/2026)
+- Forms `1FAIpQLSc9xV79…` (conta abafinanceiro2023) + QR em `artes/QR PEDIDO DE ORACAO.png`.
+- Fluxo BotConversa **PEDIDO DE ORAÇÃO** id `9283466` (resposta imediata de acolhimento + Isaías 59:1).
+- Apps Script: entrada nova em `FORMULARIOS` (`grupo: true`) → aviso "🙏 Novo PEDIDO DE ORAÇÃO" no 41 99512-6655 (secretaria = intercessão) **e** post no grupo da intercessão.
+- **Grupo:** o BotConversa não tem API de grupo (conferido no swagger). Quem posta é um número da igreja QUE ESTÁ NO GRUPO, conectado como instância na **UAZAPI da Transborda** (`POST /send/text {number: <jid>@g.us, text}`, header `token`). Propriedades do script: `UAZAPI_TOKEN` e `GRUPO_ORACAO_JID`. Sem elas o script só pula o grupo.
+- Link do grupo: `https://chat.whatsapp.com/Jzu0aoxIHAoJOSGAITWZQF` → id via `POST /group/inviteInfo {invitecode}` (só lê, não entra).
+- ✅ 25/09 NO AR: instância UAZAPI **"Igreja Aba"** (554195126655, o MESMO número do BotConversa — lá ele é "aparelho conectado", então os dois convivem; UAZAPI sem webhook, só posta). Grupo **"INTERCESSÃO ONLINE GERANDO INTERCESSORES!"** = `120363206368539980@g.us` (número está dentro). Teste postado no grupo 12:23. 3 gatilhos ativos (Visitantes, Novo convertido, Pedido de oração).
+- Truques do editor: o seletor de função não obedece clique automatizado → pôr um atalho `function AGORA_x(){x()}` no TOPO do arquivo (o editor escolhe a 1ª função) e apagar depois. A chave de admin da UAZAPI é protegida na Vercel (nem `vercel env run` entrega) → instância se cria no painel da UAZAPI.
