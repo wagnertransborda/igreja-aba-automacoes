@@ -61,6 +61,23 @@ Paleta tirada do Instagram @igrejaabacuritiba: preto `#070b0b`, petróleo `#0c35
 4. ✅ **n8n aposentado (25/09)** — os dois Forms agora rodam no **Apps Script** `apps-script/Code.gs` (projeto "Igreja ABA - Forms para BotConversa", conta abafinanceiro2023, chave na propriedade `BOTCONVERSA_API_KEY`, 2 gatilhos "Ao enviar"). Grátis, sem prazo. Workflows do n8n Cloud DESLIGADOS (trial acaba ~30/09). Formulário novo = linha nova em `FORMULARIOS` + rodar `instalar`. ⚠️ Rodar `instalar` numa janela só com a conta abafinanceiro2023 (com várias contas logadas o Executar trava).
 5. Sangria 3 mm no folder se a gráfica pedir.
 
+## 📍 RETOMAR AQUI — planilha de visitantes sem as respostas de 04/10 (aberto em 05/10/2026)
+
+**Pedido da atendente:** "não consigo visualizar a planilha com as respostas dos visitantes que preenchem pelo Forms, como antes. Na planilha não aparece a data de ontem."
+
+**O que já foi conferido (05/10):**
+- ✅ A automação funcionou: em 04/10 saíram **5 avisos** "🔔 Novo cadastro de visitante" no 41 99512-6655, entre 19h45 e 19h54 (lido pela instância UAZAPI "Igreja Aba", só leitura).
+- ✅ `apps-script/Code.gs` **não grava em planilha** — lê a resposta direto do Forms (gatilho "Ao enviar"). Quem preenche a planilha é o próprio Google Forms, pelo vínculo de respostas.
+- ❌ Logo, o defeito é só o vínculo Forms → planilha (desligado, ou apontando pra outra planilha/aba), ou a atendente abre uma cópia antiga / não tem acesso.
+- As 5 respostas **não se perderam**: ficam dentro do Forms (aba "Respostas").
+
+**O que falta — precisa da conta abafinanceiro2023@gmail.com aberta no Chrome:**
+1. Abrir o Forms de visitantes (edição) › aba **Respostas** › confirmar as 5 respostas de 04/10.
+2. Ver pra onde o Forms está mandando: botão **"Ver no Planilhas"** / **"Vincular ao Planilhas"**. Se estiver desligado ou em outra planilha, religar na "Formulário visitantes" (o Google repõe todas as respostas, inclusive 04/10 — pode criar uma aba nova "Respostas ao formulário 2").
+3. Conferir na planilha que 04/10 apareceu.
+4. Compartilhar a planilha com a atendente (falta o Wagner dizer o e-mail/número dela) e mandar o link.
+5. Conferir o mesmo vínculo nos outros dois Forms (Novo convertido e Pedido de oração).
+
 ## Pedido de oração (25/09/2026)
 - Forms `1FAIpQLSc9xV79…` (conta abafinanceiro2023) + QR em `artes/QR PEDIDO DE ORACAO.png`.
 - Fluxo BotConversa **PEDIDO DE ORAÇÃO** id `9283466` (resposta imediata de acolhimento + Isaías 59:1).
