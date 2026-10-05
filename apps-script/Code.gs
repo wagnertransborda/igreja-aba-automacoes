@@ -25,6 +25,7 @@ const FORMULARIOS = [
     nome: 'Visitantes',
     fluxo: 9004500, // INTEGRAÇÃO FORMS VISITANTES
     titulo: '🔔 *Novo cadastro de visitante*',
+    planilha: 'PLANILHA_VISITANTES', // propriedade do script com o link da planilha de respostas
   },
   {
     codigo: '1FAIpQLSf8TSgFn-3uhwZBI6WT0_ZeNdnJT2NoCe0bBCCyuyuILw85UA',
@@ -111,7 +112,11 @@ function aoResponder(e) {
         || ('▫️ *' + r.pergunta.replace(/\?$/, '') + ':*');
       linhas.push(rotulo + ' ' + r.resposta);
     });
-    const texto = [cfg.titulo, '', ...linhas, '', '💬 Falar com a pessoa: https://wa.me/' + telefone].join('\n');
+    // O link da planilha fica em propriedade do script: este repositório é público e a planilha tem dado de visitante.
+    const planilha = cfg.planilha ? (PropertiesService.getScriptProperties().getProperty(cfg.planilha) || '').trim() : '';
+    const rodape = ['💬 Falar com a pessoa: https://wa.me/' + telefone];
+    if (planilha) rodape.push('📊 Planilha com todos os cadastros: ' + planilha);
+    const texto = [cfg.titulo, '', ...linhas, '', ...rodape].join('\n');
     try {
       const aviso = post('/subscriber/', { phone: AVISO_TELEFONE, first_name: 'Avisos', last_name: 'Cadastro Visitantes' });
       post('/subscriber/' + aviso.id + '/send_message/', { type: 'text', value: texto });

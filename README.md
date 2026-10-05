@@ -71,7 +71,11 @@ Paleta tirada do Instagram @igrejaabacuritiba: preto `#070b0b`, petróleo `#0c35
 - ❌ Logo, o defeito é só o vínculo Forms → planilha (desligado, ou apontando pra outra planilha/aba), ou a atendente abre uma cópia antiga / não tem acesso.
 - As 5 respostas **não se perderam**: ficam dentro do Forms (aba "Respostas").
 
-**O que falta — precisa da conta abafinanceiro2023@gmail.com aberta no Chrome:**
+**✅ 05/10 (tarde) — resolvido o principal:** a planilha ESTAVA certa (13 respostas, as 5 de 04/10 lá). Era só acesso: o Wagner liberou o link. O vínculo Forms → planilha nunca quebrou; os passos abaixo ficaram só de referência.
+
+**Opcional, pronto no código:** o aviso de visitante passa a trazer "📊 Planilha com todos os cadastros: <link>" se existir a propriedade do script `PLANILHA_VISITANTES` (link da planilha). Sem a propriedade nada muda. Falta colar o `Code.gs` novo no Apps Script e criar a propriedade. ⚠️ Não pôr o link da planilha neste repositório (é público).
+
+**Passos de referência — precisa da conta abafinanceiro2023@gmail.com aberta no Chrome:**
 1. Abrir o Forms de visitantes (edição) › aba **Respostas** › confirmar as 5 respostas de 04/10.
 2. Ver pra onde o Forms está mandando: botão **"Ver no Planilhas"** / **"Vincular ao Planilhas"**. Se estiver desligado ou em outra planilha, religar na "Formulário visitantes" (o Google repõe todas as respostas, inclusive 04/10 — pode criar uma aba nova "Respostas ao formulário 2").
 3. Conferir na planilha que 04/10 apareceu.
