@@ -61,6 +61,21 @@ Paleta tirada do Instagram @igrejaabacuritiba: preto `#070b0b`, petróleo `#0c35
 4. ✅ **n8n aposentado (25/09)** — os dois Forms agora rodam no **Apps Script** `apps-script/Code.gs` (projeto "Igreja ABA - Forms para BotConversa", conta abafinanceiro2023, chave na propriedade `BOTCONVERSA_API_KEY`, 2 gatilhos "Ao enviar"). Grátis, sem prazo. Workflows do n8n Cloud DESLIGADOS (trial acaba ~30/09). Formulário novo = linha nova em `FORMULARIOS` + rodar `instalar`. ⚠️ Rodar `instalar` numa janela só com a conta abafinanceiro2023 (com várias contas logadas o Executar trava).
 5. Sangria 3 mm no folder se a gráfica pedir.
 
+## 📍 RETOMAR AQUI — Novo Convertido "sem as respostas de 11/10" (aberto em 14/10/2026)
+
+**Pedido da igreja:** o formulário do Novo Convertido não mostra as respostas de domingo 11/10, preenchidas pelo QR Code.
+
+**Causa encontrada (14/10):** existem **dois** formulários de Novo Convertido.
+- Link que a igreja usa: `forms.gle/otoenCLijqKGHZiU6` → `1FAIpQLSfzlCR18O2…`, título **"MELHOR DECISÃO DA SUA VIDA!"** — o ANTIGO, fora da automação.
+- QR impresso (`artes/QR NOVO CONVERTIDO.png`) e Apps Script → `1FAIpQLSf8TSg…`, título **"Novo convertido"** — o NOVO.
+- Logo, as respostas de 11/10 devem estar no formulário NOVO (aba Respostas).
+
+**Falta (amanhã):**
+1. Conferir as respostas de 11/10 no Forms "Novo convertido" (conta abafinanceiro2023) e/ou os avisos "🔔 Novo cadastro de NOVO CONVERTIDO" no 41 99512-6655.
+2. Vincular o Forms novo a uma planilha e compartilhar com a atendente (igual aos visitantes). ⚠️ Não pôr o link da planilha neste repositório (é público).
+3. Pedir pra pararem de divulgar o link antigo e/ou fechar o antigo para novas respostas.
+4. Mandar pra atendente a explicação (as respostas não se perderam, estão no formulário novo).
+
 ## 📍 RETOMAR AQUI — planilha de visitantes sem as respostas de 04/10 (aberto em 05/10/2026)
 
 **Pedido da atendente:** "não consigo visualizar a planilha com as respostas dos visitantes que preenchem pelo Forms, como antes. Na planilha não aparece a data de ontem."
