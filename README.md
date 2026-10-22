@@ -61,6 +61,25 @@ Paleta tirada do Instagram @igrejaabacuritiba: preto `#070b0b`, petróleo `#0c35
 4. ✅ **n8n aposentado (25/09)** — os dois Forms agora rodam no **Apps Script** `apps-script/Code.gs` (projeto "Igreja ABA - Forms para BotConversa", conta abafinanceiro2023, chave na propriedade `BOTCONVERSA_API_KEY`, 2 gatilhos "Ao enviar"). Grátis, sem prazo. Workflows do n8n Cloud DESLIGADOS (trial acaba ~30/09). Formulário novo = linha nova em `FORMULARIOS` + rodar `instalar`. ⚠️ Rodar `instalar` numa janela só com a conta abafinanceiro2023 (com várias contas logadas o Executar trava).
 5. Sangria 3 mm no folder se a gráfica pedir.
 
+## 📍 RETOMAR AQUI — "a atendente não acha os leads" (aberto em 22/10/2026)
+
+**Diagnóstico (22/10):**
+- ✅ A automação de visitantes funciona de ponta a ponta: em 18/10 entraram 8 visitantes, e cada um recebeu o aviso no 41 99512-6655, as boas-vindas com o folder em 1h e o vídeo em 24h (conferido na UAZAPI, só leitura).
+- ❌ Causa: os fluxos não punham **etiqueta**, então os leads ficavam misturados com todos os contatos do WhatsApp no BotConversa.
+
+**Feito (22/10), conferido depois de recarregar:** cada fluxo agora começa por uma Ação "Adicionar etiqueta":
+- INTEGRAÇÃO FORMS VISITANTES `9004500` → **lead_google_forms** (etiqueta que já existia desde abril)
+- NOVO CONVERTIDO `9260130` → **novo_convertido** (criada)
+- PEDIDO DE ORAÇÃO `9283466` → **pedido_oracao** (criada; fica depois do acolhimento)
+
+**Falta:**
+1. O Wagner etiquetar à mão os 8 visitantes de 18/10 com `lead_google_forms` (Contatos › selecionar › Opções › Adicionar etiqueta(s)). Atenção: "Excluir contato(s)" fica no mesmo menu.
+2. ⏳ **Esperando a atendente responder qual link de Novo Convertido a igreja divulga.** O antigo "MELHOR DECISÃO DA SUA VIDA!" (`forms.gle/otoenCLijqKGHZiU6`) continua aberto e fora da automação: quem preenche ali não recebe mensagem e não aparece no BotConversa. As perguntas dele são diferentes das do novo (Data Visita, **Celular**, Veio a convite).
+   - Recomendado: fechar o antigo para novas respostas (com uma mensagem apontando para o novo) e divulgar só o novo (o do QR). Precisa da conta abafinanceiro2023.
+   - Alternativa (não recomendada): ligar o antigo ao `Code.gs`. Teria que mudar a busca do telefone, que hoje procura "telefone" e não "celular".
+
+**Truques do construtor do BotConversa:** arrastar com o mouse liga uma saída a uma entrada. Para apagar uma ligação, clique no meio da linha e use a lixeira vermelha. Uma saída que já tem ligação não aceita outra: ligue a ação nova primeiro e depois apague a ligação antiga.
+
 ## 📍 RETOMAR AQUI — Novo Convertido "sem as respostas de 11/10" (aberto em 14/10/2026)
 
 **Pedido da igreja:** o formulário do Novo Convertido não mostra as respostas de domingo 11/10, preenchidas pelo QR Code.
