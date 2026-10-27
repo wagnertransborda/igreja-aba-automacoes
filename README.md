@@ -61,6 +61,12 @@ Paleta tirada do Instagram @igrejaabacuritiba: preto `#070b0b`, petróleo `#0c35
 4. ✅ **n8n aposentado (25/09)** — os dois Forms agora rodam no **Apps Script** `apps-script/Code.gs` (projeto "Igreja ABA - Forms para BotConversa", conta abafinanceiro2023, chave na propriedade `BOTCONVERSA_API_KEY`, 2 gatilhos "Ao enviar"). Grátis, sem prazo. Workflows do n8n Cloud DESLIGADOS (trial acaba ~30/09). Formulário novo = linha nova em `FORMULARIOS` + rodar `instalar`. ⚠️ Rodar `instalar` numa janela só com a conta abafinanceiro2023 (com várias contas logadas o Executar trava).
 5. Sangria 3 mm no folder se a gráfica pedir.
 
+## 27/10/2026 — aviso na hora do Novo Convertido
+
+- A igreja divulga o formulário **novo** ("Novo convertido", `1FAIpQLSf8TSg…`).
+- Fluxo NOVO CONVERTIDO `9260130`: o 1º bloco Ação agora faz **Adicionar etiqueta novo_convertido** + **Notificar membro da equipe → Carleni, por WhatsApp**, na hora, com `{nome-completo}` e `{telefone}`. Conferido depois de recarregar.
+- Até 27/10 nenhum contato tinha a etiqueta `novo_convertido` e não houve aviso "NOVO CONVERTIDO" no 41 99512-6655. Quem preencheu antes só dá pra achar pelas respostas do Forms (conta abafinanceiro2023).
+
 ## 📍 RETOMAR AQUI — "a atendente não acha os leads" (aberto em 22/10/2026)
 
 **Diagnóstico (22/10):**
