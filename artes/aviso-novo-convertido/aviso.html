@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Novo Convertido — aviso na hora</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@1,500;1,600&display=swap" rel="stylesheet">
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Montserrat, sans-serif; color: #1d2626; background: #fff; font-size: 10pt; line-height: 1.42; }
+  .folha { width: 210mm; height: 297mm; overflow: hidden; display: flex; flex-direction: column; }
+  header { background: #0c3533; color: #fff; padding: 11mm 16mm 8mm; }
+  header .tag { font-size: 8pt; letter-spacing: .18em; text-transform: uppercase; color: #a9c9bd; font-weight: 600; }
+  header h1 { font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 600; font-size: 26pt; line-height: 1.1; margin-top: 3mm; }
+  header p { margin-top: 3mm; color: #d8e6e0; font-size: 10.5pt; }
+  main { padding: 7mm 16mm 0; flex: 1; }
+  h2 { font-size: 11pt; color: #134a46; text-transform: uppercase; letter-spacing: .08em; margin: 0 0 3mm; }
+  section { margin-bottom: 5mm; }
+  .zap { background: #e7f3ee; border-left: 4px solid #134a46; border-radius: 3mm; padding: 4mm 5mm; font-size: 10pt; }
+  .zap small { display: block; color: #4c6460; font-size: 8pt; margin-bottom: 1.5mm; }
+  ol.passos { list-style: none; counter-reset: p; }
+  ol.passos li { counter-increment: p; position: relative; padding-left: 10mm; margin-bottom: 3mm; }
+  ol.passos li::before { content: counter(p); position: absolute; left: 0; top: 0; width: 6.5mm; height: 6.5mm; border-radius: 50%; background: #134a46; color: #fff; font-weight: 700; font-size: 9pt; display: flex; align-items: center; justify-content: center; }
+  .linha { display: flex; gap: 4mm; }
+  .linha > div { flex: 1; background: #f4f7f6; border-radius: 3mm; padding: 3.5mm 4mm; }
+  .linha b { display: block; color: #134a46; font-size: 9pt; margin-bottom: 1mm; }
+  .caminho { font-weight: 600; color: #134a46; }
+  .alerta { background: #fff6e5; border: 1px solid #f0d49a; border-radius: 3mm; padding: 4mm 5mm; }
+  .alerta b { color: #8a5a00; }
+  footer { padding: 4mm 0 8mm; color: #6b7b78; font-size: 8.5pt; border-top: 1px solid #e3e9e7; margin: 0 16mm; padding-left: 0; padding-right: 0; }
+</style>
+</head>
+<body>
+<div class="folha">
+  <header>
+    <div class="tag">Igreja ABA Curitiba · BotConversa</div>
+    <h1>Novo Convertido:<br>aviso na hora no seu WhatsApp</h1>
+    <p>Carleni, a partir de agora, sempre que alguém preencher o formulário de Novo Convertido, você recebe um aviso no seu WhatsApp para fazer o primeiro contato.</p>
+  </header>
+
+  <main>
+    <section>
+      <h2>1. O aviso que chega no seu WhatsApp</h2>
+      <div class="zap">
+        <small>Mensagem enviada pelo BotConversa, assim que a pessoa envia o formulário:</small>
+        🙏 Temos um NOVO CONVERTIDO! Ele acabou de preencher o formulário. Procure no BotConversa pela etiqueta novo_convertido e faça o primeiro contato. Nome: <b>(nome da pessoa)</b> - Telefone: <b>(telefone)</b>
+      </div>
+    </section>
+
+    <section>
+      <h2>2. O que o sistema faz sozinho</h2>
+      <div class="linha">
+        <div><b>Na hora</b>Coloca a etiqueta <span class="caminho">novo_convertido</span> e avisa você.</div>
+        <div><b>1 hora depois</b>Envia a carta de boas-vindas da Família ABA (PDF).</div>
+        <div><b>No dia seguinte</b>Envia o vídeo de boas-vindas do pastor.</div>
+        <div><b>1 dia depois</b>Abre o atendimento em seu nome e avisa você de novo.</div>
+      </div>
+    </section>
+
+    <section>
+      <h2>3. Como encontrar os novos convertidos no BotConversa</h2>
+      <ol class="passos">
+        <li>Entre no BotConversa e clique em <span class="caminho">Contatos</span> (menu da esquerda).</li>
+        <li>Clique no botão azul <span class="caminho">Filtros</span> › <span class="caminho">Etiqueta</span> › <span class="caminho">É</span>.</li>
+        <li>Escolha <span class="caminho">novo_convertido</span>. Aparecem só as pessoas que vieram pelo formulário.</li>
+        <li>Clique no nome da pessoa para abrir a conversa e fazer o contato.</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>4. Importante</h2>
+      <div class="alerta">
+        <b>Só funciona com o formulário novo, chamado “Novo convertido”</b> (o do QR Code). O formulário antigo
+        “MELHOR DECISÃO DA SUA VIDA!” não avisa ninguém e não manda a pessoa para o BotConversa.
+        Por favor, divulguem só o formulário novo.<br><br>
+        Quem preencheu <b>antes de 27/10/2026</b> ainda não tem a etiqueta. Essas pessoas estão nas respostas do formulário.
+      </div>
+    </section>
+  </main>
+
+  <footer>Dúvidas ou se precisar trocar quem recebe o aviso: falar com o Wagner · Transborda Marketing</footer>
+</div>
+</body>
+</html>
