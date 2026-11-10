@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Como achar os cadastros dos formulários</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@1,500;1,600&display=swap" rel="stylesheet">
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Montserrat, sans-serif; color: #1d2626; background: #fff; font-size: 9.4pt; line-height: 1.38; }
+  .folha { width: 210mm; height: 297mm; overflow: hidden; display: flex; flex-direction: column; }
+  header { background: #0c3533; color: #fff; padding: 8mm 16mm 6mm; }
+  header .tag { font-size: 8pt; letter-spacing: .18em; text-transform: uppercase; color: #a9c9bd; font-weight: 600; }
+  header h1 { font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 600; font-size: 23pt; line-height: 1.1; margin-top: 2mm; }
+  header p { margin-top: 3mm; color: #d8e6e0; font-size: 10pt; }
+  main { padding: 5mm 16mm 0; flex: 1; }
+  h2 { font-size: 10.5pt; color: #134a46; text-transform: uppercase; letter-spacing: .08em; margin: 0 0 3mm; }
+  section { margin-bottom: 4mm; }
+  .cards { display: flex; gap: 4mm; }
+  .card { flex: 1; border: 1px solid #dfe8e5; border-radius: 3mm; padding: 4mm; }
+  .card .form { font-size: 8pt; color: #4c6460; text-transform: uppercase; letter-spacing: .06em; font-weight: 600; }
+  .etq { display: inline-block; margin: 2mm 0 2.5mm; padding: 1mm 3mm; border-radius: 1.5mm; font-weight: 600; font-size: 10.5pt; }
+  .azul { background: #e5efff; color: #2a5bd7; }
+  .verde { background: #e3f6ea; color: #1f8a4c; }
+  .roxo { background: #efe7fb; color: #7a4cc2; }
+  .card ul { list-style: none; font-size: 8.6pt; color: #33403e; }
+  .card li { padding-left: 3.5mm; position: relative; margin-bottom: 1mm; }
+  .card li::before { content: '•'; position: absolute; left: 0; color: #134a46; }
+  ol.passos { list-style: none; counter-reset: p; }
+  ol.passos li { counter-increment: p; position: relative; padding-left: 10mm; margin-bottom: 2.2mm; }
+  ol.passos li::before { content: counter(p); position: absolute; left: 0; top: 0; width: 6.5mm; height: 6.5mm; border-radius: 50%; background: #134a46; color: #fff; font-weight: 700; font-size: 9pt; display: flex; align-items: center; justify-content: center; }
+  .caminho { font-weight: 600; color: #134a46; }
+  .dica { background: #e7f3ee; border-left: 4px solid #134a46; border-radius: 3mm; padding: 3.5mm 5mm; }
+  .alerta { background: #fff6e5; border: 1px solid #f0d49a; border-radius: 3mm; padding: 3.5mm 5mm; }
+  .alerta b { color: #8a5a00; }
+  footer { padding: 4mm 0 8mm; color: #6b7b78; font-size: 8.5pt; border-top: 1px solid #e3e9e7; margin: 0 16mm; }
+</style>
+</head>
+<body>
+<div class="folha">
+  <header>
+    <div class="tag">Igreja ABA Curitiba · BotConversa</div>
+    <h1>Como achar quem preencheu<br>os formulários</h1>
+    <p>Quem preenche um dos 3 formulários (pelo QR Code ou pelo link) entra sozinho no BotConversa, já com uma etiqueta com o nome do formulário. Basta filtrar pela etiqueta.</p>
+  </header>
+
+  <main>
+    <section>
+      <h2>1. Uma etiqueta para cada formulário</h2>
+      <div class="cards">
+        <div class="card">
+          <div class="form">Formulário Visitantes</div>
+          <span class="etq azul">visitantes</span>
+          <ul>
+            <li>Na hora: aviso na conversa “Avisos Cadastro Visitantes”.</li>
+            <li>1 hora depois: boas-vindas + folder.</li>
+            <li>No dia seguinte: vídeo do pastor.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="form">Formulário Novo Convertido</div>
+          <span class="etq verde">novo_convertido</span>
+          <ul>
+            <li>Na hora: aviso no WhatsApp da Carleni.</li>
+            <li>1 hora depois: carta de boas-vindas (PDF).</li>
+            <li>No dia seguinte: vídeo do pastor.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="form">Formulário Pedido de Oração</div>
+          <span class="etq roxo">pedido_oracao</span>
+          <ul>
+            <li>Na hora: mensagem de acolhimento para a pessoa e aviso em “Avisos Cadastro Visitantes”.</li>
+            <li>O pedido vai para o grupo da intercessão.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>2. Passo a passo para ver a lista</h2>
+      <ol class="passos">
+        <li>Entre no BotConversa e clique em <span class="caminho">Contatos</span>, no menu da esquerda.</li>
+        <li>Na coluna <span class="caminho">Mais popular › Etiquetas</span>, clique na etiqueta que você quer:
+          <span class="caminho">visitantes</span>, <span class="caminho">novo_convertido</span> ou <span class="caminho">pedido_oracao</span>.<br>
+          Se ela não aparecer ali, use o botão azul <span class="caminho">Filtros</span> › <span class="caminho">Etiqueta</span> › <span class="caminho">É</span> e escolha a etiqueta.</li>
+        <li>A lista mostra só quem veio daquele formulário, com a <b>data e a hora do cadastro</b>. Os mais novos ficam em cima.</li>
+        <li>Clique no nome da pessoa e depois no balãozinho de conversa para ver as mensagens que o sistema já mandou e continuar o atendimento.</li>
+        <li>Para trocar de lista, clique em <span class="caminho">Redefinir</span> e escolha outra etiqueta.</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>3. Rotina de segunda-feira</h2>
+      <div class="dica">
+        Abra <span class="caminho">Contatos</span>, clique em <span class="caminho">visitantes</span> e veja quem tem a data do domingo.
+        Depois faça o mesmo com <span class="caminho">novo_convertido</span> e <span class="caminho">pedido_oracao</span>.
+        Assim ninguém do culto fica sem contato.
+      </div>
+    </section>
+
+    <section>
+      <h2>4. Bom saber</h2>
+      <div class="alerta">
+        As conversas que o sistema inicia aparecem como <b>“Fechado”</b> e <b>sem membro atribuído</b>. Isso é normal:
+        a pessoa já recebeu as mensagens automáticas. Por isso, o jeito certo de achar os cadastros é pela <b>etiqueta</b>, em Contatos.<br><br>
+        Quem já tinha falado com a igreja pelo WhatsApp antes aparece com a data <b>dessa primeira conversa</b>, mas também recebe a etiqueta.<br><br>
+        O formulário antigo de Novo Convertido, <b>“MELHOR DECISÃO DA SUA VIDA!”</b>, não manda ninguém para o BotConversa.
+        Divulguem só os formulários do QR Code.
+      </div>
+    </section>
+  </main>
+
+  <footer>Dúvidas: falar com o Wagner · Transborda Marketing</footer>
+</div>
+</body>
+</html>

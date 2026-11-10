@@ -61,6 +61,14 @@ Paleta tirada do Instagram @igrejaabacuritiba: preto `#070b0b`, petróleo `#0c35
 4. ✅ **n8n aposentado (25/09)** — os dois Forms agora rodam no **Apps Script** `apps-script/Code.gs` (projeto "Igreja ABA - Forms para BotConversa", conta abafinanceiro2023, chave na propriedade `BOTCONVERSA_API_KEY`, 2 gatilhos "Ao enviar"). Grátis, sem prazo. Workflows do n8n Cloud DESLIGADOS (trial acaba ~30/09). Formulário novo = linha nova em `FORMULARIOS` + rodar `instalar`. ⚠️ Rodar `instalar` numa janela só com a conta abafinanceiro2023 (com várias contas logadas o Executar trava).
 5. Sangria 3 mm no folder se a gráfica pedir.
 
+## 10/11/2026 — etiquetas com o nome do formulário + teste do Pedido de Oração
+
+- Etiqueta `lead_google_forms` **renomeada para `visitantes`** (mesma etiqueta, então os 36 contatos e o fluxo 9004500 já usam o nome novo). Ficaram: `visitantes` · `novo_convertido` · `pedido_oracao`, cada uma com a descrição "Cadastro pelo Forms … (QR Code)".
+- Conferido em 08/11: 15 visitantes e 3 novos convertidos entraram, todos com etiqueta e com as mensagens entregues (Apps Script sem erro em nenhum).
+- ✅ Pedido de Oração testado em 10/11 às 09:53 ("TESTE Wagner", 41 98772-6556): fluxo 9283466, acolhimento entregue, etiqueta `pedido_oracao`, aviso e post no grupo da intercessão. O contato "Wagner Transborda" fica com a **automação desligada** (foi ligada só durante o teste).
+- Guia para a atendente: `artes/guia-etiquetas/guia.html` → `entregas/guia-etiquetas-formularios.pdf`.
+- Os chats que o robô abre ficam "Fechado" e sem membro: o usuário novo precisa ver **Contatos** e o Inbox em "Todos", senão não acha os leads.
+
 ## 27/10/2026 — aviso na hora do Novo Convertido
 
 - A igreja divulga o formulário **novo** ("Novo convertido", `1FAIpQLSf8TSg…`).
