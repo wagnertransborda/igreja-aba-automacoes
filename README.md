@@ -138,3 +138,10 @@ Paleta tirada do Instagram @igrejaabacuritiba: preto `#070b0b`, petróleo `#0c35
 - Link do grupo: `https://chat.whatsapp.com/Jzu0aoxIHAoJOSGAITWZQF` → id via `POST /group/inviteInfo {invitecode}` (só lê, não entra).
 - ✅ 25/09 NO AR: instância UAZAPI **"Igreja Aba"** (554195126655, o MESMO número do BotConversa — lá ele é "aparelho conectado", então os dois convivem; UAZAPI sem webhook, só posta). Grupo **"INTERCESSÃO ONLINE GERANDO INTERCESSORES!"** = `120363206368539980@g.us` (número está dentro). Teste postado no grupo 12:23. 3 gatilhos ativos (Visitantes, Novo convertido, Pedido de oração).
 - Truques do editor: o seletor de função não obedece clique automatizado → pôr um atalho `function AGORA_x(){x()}` no TOPO do arquivo (o editor escolhe a 1ª função) e apagar depois. A chave de admin da UAZAPI é protegida na Vercel (nem `vercel env run` entrega) → instância se cria no painel da UAZAPI.
+
+## 12/11/2026 — 3 Forms novos do site (pedido do Valdir)
+
+- Cards do site "Quero me batizar" e "Ser membro e servir" abriam wa.me (no PC caía no QR code) → viraram Forms. O card do GC ganhou "Falar com a Secretaria".
+- Criados por `criarFormulariosNovos` (o id fica nas propriedades `FORM_BATISMO`, `FORM_MEMBRO`, `FORM_GC`). **Sem fluxo**: a pessoa entra no BotConversa com a etiqueta `batismo` / `membro_servir` / `quer_gc` e a secretaria recebe o aviso.
+- Teste 12/11 15:23 OK (aviso + etiqueta no contato "Wagner Transborda").
+- Pendente: o Valdir adicionar a Carlene (Secretaria) como colaboradora nos 3 Forms, quando ela mandar o e-mail.
