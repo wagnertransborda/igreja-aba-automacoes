@@ -40,7 +40,93 @@ const FORMULARIOS = [
     titulo: '🙏 *Novo PEDIDO DE ORAÇÃO*',
     grupo: true, // também posta no grupo da intercessão (ver enviarProGrupo)
   },
+  // 12/11/2026 — pedido do Valdir: os cards do site que abriam o WhatsApp (no PC caía no QR code)
+  // viraram Forms. Sem fluxo no BotConversa: a pessoa é cadastrada com etiqueta e a secretaria
+  // recebe o aviso. Os Forms são criados por `criarFormulariosNovos` (o id fica na propriedade `prop`).
+  {
+    prop: 'FORM_BATISMO',
+    nome: 'Quero me batizar',
+    etiqueta: 'batismo',
+    titulo: '💧 *Novo pedido de BATISMO*',
+  },
+  {
+    prop: 'FORM_MEMBRO',
+    nome: 'Ser membro e servir',
+    etiqueta: 'membro_servir',
+    titulo: '🤝 *Quer SER MEMBRO E SERVIR*',
+  },
+  {
+    prop: 'FORM_GC',
+    nome: 'Participar de um GC',
+    etiqueta: 'quer_gc',
+    titulo: '🏠 *Quer PARTICIPAR DE UM GC*',
+  },
 ];
+
+// Perguntas dos Forms novos (nome e telefone vêm primeiro em todos — a integração acha os dois pelo texto).
+const PERGUNTAS_NOVAS = {
+  FORM_BATISMO: {
+    titulo: 'Quero me batizar — Igreja ABA Curitiba',
+    descricao: 'Que alegria! Deixe seus dados e a secretaria da ABA vai falar com você pelo WhatsApp sobre o próximo batismo.',
+    extras: [
+      ['lista', 'Você já frequenta a ABA?', ['Sim, sou membro', 'Sim, frequento', 'Ainda não']],
+      ['texto', 'Em qual GC você participa? (se participar)'],
+      ['paragrafo', 'Quer deixar alguma mensagem ou dúvida?'],
+    ],
+  },
+  FORM_MEMBRO: {
+    titulo: 'Ser membro e servir — Igreja ABA Curitiba',
+    descricao: 'Que bom que você quer fazer parte! Deixe seus dados e a secretaria da ABA vai falar com você pelo WhatsApp sobre a Integração.',
+    extras: [
+      ['lista', 'Há quanto tempo você frequenta a ABA?', ['Menos de 6 meses', 'De 6 meses a 1 ano', 'Mais de 1 ano']],
+      ['texto', 'Em qual GC você participa? (se participar)'],
+      ['caixas', 'Em qual área você gostaria de servir?', ['Louvor', 'ABA Kids', 'Recepção', 'Mídia', 'Intercessão', 'Ação social', 'Ainda não sei']],
+      ['paragrafo', 'Quer deixar alguma mensagem?'],
+    ],
+  },
+  FORM_GC: {
+    titulo: 'Quero participar de um GC — Igreja ABA Curitiba',
+    descricao: 'Os GCs são grupos nas casas, perto de você. Deixe seus dados e a secretaria da ABA vai te indicar o GC mais próximo pelo WhatsApp.',
+    extras: [
+      ['texto', 'Em qual bairro você mora?'],
+      ['caixas', 'Quais dias ficam melhor pra você?', ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado']],
+      ['paragrafo', 'Quer deixar alguma mensagem?'],
+    ],
+  },
+};
+
+/**
+ * Rodar UMA vez (12/11/2026): cria os 3 Forms novos nesta conta (se ainda não existem), guarda o id
+ * de cada um nas propriedades do script, liga os gatilhos de todos e escreve no log o link público
+ * de cada Form novo (é o link que vai no site).
+ */
+function criarFormulariosNovos() {
+  const props = PropertiesService.getScriptProperties();
+  Object.keys(PERGUNTAS_NOVAS).forEach(prop => {
+    let form = null;
+    const id = props.getProperty(prop);
+    if (id) { try { form = FormApp.openById(id); } catch (e) { form = null; } }
+    if (!form) {
+      const p = PERGUNTAS_NOVAS[prop];
+      form = FormApp.create(p.titulo);
+      form.setDescription(p.descricao)
+        .setCollectEmail(false)
+        .setConfirmationMessage('Recebemos! A secretaria da Igreja ABA vai falar com você pelo WhatsApp. Deus abençoe!');
+      form.addTextItem().setTitle('Nome completo').setRequired(true);
+      form.addTextItem().setTitle('Telefone (WhatsApp) com DDD').setHelpText('Ex.: 41 99999-9999').setRequired(true);
+      p.extras.forEach(([tipo, titulo, opcoes]) => {
+        if (tipo === 'lista') form.addMultipleChoiceItem().setTitle(titulo).setChoiceValues(opcoes).setRequired(true);
+        else if (tipo === 'caixas') form.addCheckboxItem().setTitle(titulo).setChoiceValues(opcoes);
+        else if (tipo === 'paragrafo') form.addParagraphTextItem().setTitle(titulo);
+        else form.addTextItem().setTitle(titulo);
+      });
+      props.setProperty(prop, form.getId());
+      console.log('Criado: ' + p.titulo);
+    }
+    console.log(prop + ' → ' + form.getPublishedUrl());
+  });
+  instalar();
+}
 
 // Rótulos curtos para as perguntas conhecidas; pergunta nova entra com o próprio texto.
 const ROTULOS = [
@@ -50,6 +136,10 @@ const ROTULOS = [
   ['oração', '🙏 *Pedido de oração:*'],
   ['conheceu', '⛪ *Como conheceu:*'],
   ['visita', '🏠 *Visita pastoral:*'],
+  ['bairro', '📍 *Bairro:*'],
+  ['servir', '🙌 *Quer servir em:*'],
+  ['dias', '🗓️ *Melhores dias:*'],
+  [' gc ', '🏠 *GC:*'],
 ];
 
 /** Liga o gatilho "ao enviar resposta" em cada formulário da lista. Pode rodar de novo sem duplicar. */
@@ -95,8 +185,11 @@ function aoResponder(e) {
   // 1) pessoa → fluxo (erro aqui não impede o aviso)
   try {
     const pessoa = post('/subscriber/', { phone: telefone, first_name: primeiro, last_name: sobrenome });
-    post('/subscriber/' + pessoa.id + '/send_flow/', { flow: cfg.fluxo });
-    console.log(cfg.nome + ': fluxo ' + cfg.fluxo + ' disparado para ' + telefone + ' (id ' + pessoa.id + ')');
+    if (cfg.fluxo) {
+      post('/subscriber/' + pessoa.id + '/send_flow/', { flow: cfg.fluxo });
+      console.log(cfg.nome + ': fluxo ' + cfg.fluxo + ' disparado para ' + telefone + ' (id ' + pessoa.id + ')');
+    }
+    if (cfg.etiqueta) poeEtiqueta(cfg.nome, pessoa.id, cfg.etiqueta);
   } catch (err) {
     console.error(cfg.nome + ': falhou pessoa/fluxo para ' + telefone + ' — ' + err.message);
   }
@@ -211,7 +304,24 @@ function testarGrupo() {
 
 function configDe(form) {
   const url = form.getPublishedUrl();
-  return FORMULARIOS.find(f => url.indexOf(f.codigo) !== -1) || null;
+  const props = PropertiesService.getScriptProperties();
+  return FORMULARIOS.find(f => f.codigo
+    ? url.indexOf(f.codigo) !== -1
+    : props.getProperty(f.prop) === form.getId()) || null;
+}
+
+/** Etiqueta pelo NOME (a etiqueta tem que existir no BotConversa; se não existir, só registra no log). */
+function poeEtiqueta(nome, idPessoa, etiqueta) {
+  try {
+    const r = UrlFetchApp.fetch(BASE + '/tags/', { headers: { 'API-KEY': chave() }, muteHttpExceptions: true });
+    const tags = JSON.parse(r.getContentText() || '[]');
+    const tag = (Array.isArray(tags) ? tags : []).find(t => String(t.name).trim().toLowerCase() === etiqueta);
+    if (!tag) { console.error(nome + ': etiqueta "' + etiqueta + '" não existe no BotConversa'); return; }
+    post('/subscriber/' + idPessoa + '/tags/' + tag.id + '/', {});
+    console.log(nome + ': etiqueta ' + etiqueta + ' na pessoa ' + idPessoa);
+  } catch (err) {
+    console.error(nome + ': falhou a etiqueta — ' + err.message);
+  }
 }
 
 function normalizaTelefone(valor) {
