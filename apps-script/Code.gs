@@ -61,6 +61,25 @@ const FORMULARIOS = [
     etiqueta: 'quer_gc',
     titulo: '🏠 *Quer PARTICIPAR DE UM GC*',
   },
+  // 18/11/2026 — pedido do Valdir: os 3 cards de Projetos do site (também wa.me) viram Forms, no mesmo esquema.
+  {
+    prop: 'FORM_JIUJITSU',
+    nome: 'Projeto Jiu-Jitsu',
+    etiqueta: 'jiujitsu',
+    titulo: '🥋 *Quer saber do JIU-JITSU*',
+  },
+  {
+    prop: 'FORM_ALFA',
+    nome: 'Projeto Alfa',
+    etiqueta: 'projeto_alfa',
+    titulo: '🎓 *Quer saber do PROJETO ALFA*',
+  },
+  {
+    prop: 'FORM_ASSISTENCIA',
+    nome: 'Assistência social',
+    etiqueta: 'assistencia_social',
+    titulo: '🧺 *ASSISTÊNCIA SOCIAL (doar ou pedir ajuda)*',
+  },
 ];
 
 // Perguntas dos Forms novos (nome e telefone vêm primeiro em todos — a integração acha os dois pelo texto).
@@ -90,6 +109,32 @@ const PERGUNTAS_NOVAS = {
     extras: [
       ['texto', 'Em qual bairro você mora?'],
       ['caixas', 'Quais dias ficam melhor pra você?', ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado']],
+      ['paragrafo', 'Quer deixar alguma mensagem?'],
+    ],
+  },
+  FORM_JIUJITSU: {
+    titulo: 'Projeto Jiu-Jitsu — Igreja ABA Curitiba',
+    descricao: 'Esporte, disciplina e amizade. Deixe seus dados e a secretaria da ABA vai falar com você pelo WhatsApp sobre o Jiu-Jitsu.',
+    extras: [
+      ['lista', 'Quem vai participar?', ['Eu mesmo', 'Meu filho / minha filha', 'Outra pessoa']],
+      ['texto', 'Idade de quem vai participar'],
+      ['paragrafo', 'Quer deixar alguma mensagem ou dúvida?'],
+    ],
+  },
+  FORM_ALFA: {
+    titulo: 'Projeto Alfa — Igreja ABA Curitiba',
+    descricao: 'Deixe seus dados e a secretaria da ABA vai falar com você pelo WhatsApp sobre o Projeto Alfa.',
+    extras: [
+      ['lista', 'Você quer…', ['Participar', 'Ajudar / servir no projeto', 'Indicar alguém']],
+      ['paragrafo', 'Quer deixar alguma mensagem ou dúvida?'],
+    ],
+  },
+  FORM_ASSISTENCIA: {
+    titulo: 'Assistência social — Igreja ABA Curitiba',
+    descricao: 'Entrega de cestas básicas e apoio às famílias. Deixe seus dados e a secretaria da ABA vai falar com você pelo WhatsApp.',
+    extras: [
+      ['lista', 'Você quer…', ['Doar', 'Pedir ajuda', 'Indicar uma família']],
+      ['texto', 'Em qual bairro você mora?'],
       ['paragrafo', 'Quer deixar alguma mensagem?'],
     ],
   },
