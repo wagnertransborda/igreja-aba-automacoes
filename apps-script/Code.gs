@@ -80,6 +80,31 @@ const FORMULARIOS = [
     etiqueta: 'assistencia_social',
     titulo: '🧺 *ASSISTÊNCIA SOCIAL (doar ou pedir ajuda)*',
   },
+  // 18/11/2026 (Wagner) — o resto dos links wa.me do site também vira Forms: ministérios + contato geral.
+  {
+    prop: 'FORM_KIDS',
+    nome: 'ABA Kids',
+    etiqueta: 'aba_kids',
+    titulo: '🧒 *Quer saber do ABA KIDS*',
+  },
+  {
+    prop: 'FORM_MULHERES',
+    nome: 'Rede de Mulheres',
+    etiqueta: 'rede_mulheres',
+    titulo: '👩 *Quer saber da REDE DE MULHERES*',
+  },
+  {
+    prop: 'FORM_CASAIS',
+    nome: 'Casais e Famílias',
+    etiqueta: 'casais',
+    titulo: '💑 *Quer saber de CASAIS E FAMÍLIAS*',
+  },
+  {
+    prop: 'FORM_CONTATO',
+    nome: 'Falar com a secretaria',
+    etiqueta: 'fale_secretaria',
+    titulo: '💬 *Contato pelo SITE*',
+  },
 ];
 
 // Perguntas dos Forms novos (nome e telefone vêm primeiro em todos — a integração acha os dois pelo texto).
@@ -136,6 +161,39 @@ const PERGUNTAS_NOVAS = {
       ['lista', 'Você quer…', ['Doar', 'Pedir ajuda', 'Indicar uma família']],
       ['texto', 'Em qual bairro você mora?'],
       ['paragrafo', 'Quer deixar alguma mensagem?'],
+    ],
+  },
+  FORM_KIDS: {
+    titulo: 'ABA Kids — Igreja ABA Curitiba',
+    descricao: 'A Palavra de um jeito que as crianças entendem e amam, nos cultos de domingo. Deixe seus dados e a secretaria da ABA vai falar com você pelo WhatsApp.',
+    extras: [
+      ['texto', 'Idade da(s) criança(s)'],
+      ['lista', 'Você quer…', ['Levar meu filho / minha filha', 'Servir no ABA Kids', 'Só tirar uma dúvida']],
+      ['paragrafo', 'Quer deixar alguma mensagem ou dúvida?'],
+    ],
+  },
+  FORM_MULHERES: {
+    titulo: 'Rede de Mulheres — Igreja ABA Curitiba',
+    descricao: 'Encontros de comunhão, palavra e cuidado entre mulheres. Deixe seus dados e a secretaria da ABA vai falar com você pelo WhatsApp.',
+    extras: [
+      ['lista', 'Você já frequenta a ABA?', ['Sim, sou membro', 'Sim, frequento', 'Ainda não']],
+      ['paragrafo', 'Quer deixar alguma mensagem ou dúvida?'],
+    ],
+  },
+  FORM_CASAIS: {
+    titulo: 'Casais e Famílias — Igreja ABA Curitiba',
+    descricao: 'Cultos de casais, retiros e cursos para construir lares fortes. Deixe seus dados e a secretaria da ABA vai falar com você pelo WhatsApp.',
+    extras: [
+      ['lista', 'Você já frequenta a ABA?', ['Sim, somos membros', 'Sim, frequentamos', 'Ainda não']],
+      ['paragrafo', 'Quer deixar alguma mensagem ou dúvida?'],
+    ],
+  },
+  FORM_CONTATO: {
+    titulo: 'Falar com a secretaria — Igreja ABA Curitiba',
+    descricao: 'Deixe seus dados e a secretaria da ABA vai falar com você pelo WhatsApp.',
+    extras: [
+      ['lista', 'Sobre o que você quer falar?', ['Quero visitar a igreja', 'Tenho uma dúvida', 'Outro assunto']],
+      ['paragrafo', 'Sua mensagem'],
     ],
   },
 };
